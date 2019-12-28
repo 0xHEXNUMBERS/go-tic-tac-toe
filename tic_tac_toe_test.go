@@ -77,25 +77,25 @@ func testHorizontal(player byte) error {
 
 	actionsWant := []move{
 		move{
-			0, 2, player,
+			0, 2,
 		},
 		move{
-			1, 0, player,
+			1, 0,
 		},
 		move{
-			1, 1, player,
+			1, 1,
 		},
 		move{
-			1, 2, player,
+			1, 2,
 		},
 		move{
-			2, 0, player,
+			2, 0,
 		},
 		move{
-			2, 1, player,
+			2, 1,
 		},
 		move{
-			2, 2, player,
+			2, 2,
 		},
 	}
 
@@ -146,25 +146,25 @@ func testVertical(player byte) error {
 
 	actionsWant := []move{
 		move{
-			2, 0, player,
+			2, 0,
 		},
 		move{
-			0, 1, player,
+			0, 1,
 		},
 		move{
-			1, 1, player,
+			1, 1,
 		},
 		move{
-			2, 1, player,
+			2, 1,
 		},
 		move{
-			0, 2, player,
+			0, 2,
 		},
 		move{
-			1, 2, player,
+			1, 2,
 		},
 		move{
-			2, 2, player,
+			2, 2,
 		},
 	}
 
@@ -215,25 +215,25 @@ func testDownRight(player byte) error {
 
 	actionsWant := []move{
 		move{
-			2, 2, player,
+			2, 2,
 		},
 		move{
-			0, 1, player,
+			0, 1,
 		},
 		move{
-			0, 2, player,
+			0, 2,
 		},
 		move{
-			1, 0, player,
+			1, 0,
 		},
 		move{
-			1, 2, player,
+			1, 2,
 		},
 		move{
-			2, 0, player,
+			2, 0,
 		},
 		move{
-			2, 1, player,
+			2, 1,
 		},
 	}
 
@@ -284,25 +284,25 @@ func testUpRight(player byte) error {
 
 	actionsWant := []move{
 		move{
-			0, 2, player,
+			0, 2,
 		},
 		move{
-			0, 0, player,
+			0, 0,
 		},
 		move{
-			0, 1, player,
+			0, 1,
 		},
 		move{
-			1, 0, player,
+			1, 0,
 		},
 		move{
-			1, 2, player,
+			1, 2,
 		},
 		move{
-			2, 1, player,
+			2, 1,
 		},
 		move{
-			2, 2, player,
+			2, 2,
 		},
 	}
 

@@ -80,8 +80,7 @@ func (b board) IsWinner(player byte) bool {
 }
 
 type move struct {
-	y, x   int
-	player byte
+	y, x int
 }
 
 type Game struct {
@@ -109,27 +108,26 @@ func (g Game) WinningPlayers() ([]byte, error) {
 }
 
 func (g Game) GetActions() (moves []move) {
-	var playerToMove byte = X
-	if g.oTurn {
-		playerToMove = O
-	}
-
 	for i := 0; i < SIZE; i++ {
 		for j := 0; j < SIZE; j++ {
 			if g.b[i][j] == '_' {
 				move := move{
-					i, j, playerToMove,
+					i, j,
 				}
 				moves = append(moves, move)
 			}
 		}
 	}
-
 	return
 }
 
 func (g Game) ApplyAction(m move) (Game, error) {
-	g.b[m.y][m.x] = m.player
+	var playerToMove byte = X
+	if g.oTurn {
+		playerToMove = O
+	}
+	g.b[m.y][m.x] = playerToMove
+	g.oTurn = !g.oTurn
 	return g, nil
 }
 
