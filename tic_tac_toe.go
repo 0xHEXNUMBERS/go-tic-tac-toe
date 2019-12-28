@@ -15,6 +15,18 @@ var (
 
 type board [SIZE][SIZE]byte
 
+func (b board) String() string {
+	out := ""
+	for i := 0; i < SIZE; i++ {
+		out += "|"
+		for j := 0; j < SIZE; j++ {
+			out += string(b[i][j]) + "|"
+		}
+		out += "\n"
+	}
+	return out
+}
+
 func (b board) IsWinner(player byte) bool {
 	//Horizontals
 	for i := 0; i < SIZE; i++ {
@@ -75,6 +87,10 @@ type move struct {
 type Game struct {
 	b     board
 	oTurn bool
+}
+
+func (g Game) String() string {
+	return g.b.String()
 }
 
 func (g Game) IsTerminalState() bool {
