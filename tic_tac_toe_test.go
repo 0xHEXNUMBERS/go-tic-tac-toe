@@ -64,59 +64,278 @@ func containSameMoves(a, b []move) bool {
 	)
 }
 
-func XWinGame() Game {
+func testHorizontal(player byte) error {
 	g := NewGame()
-	g.b[0][0] = X
-	g.b[0][1] = X
-	return g
-}
+	g.b[0][0] = player
+	g.b[0][1] = player
 
-func TestXWinGame(t *testing.T) {
-	g := XWinGame()
+	if player == O {
+		g.oTurn = true
+	}
+
 	actionsGot := g.GetActions()
 
 	actionsWant := []move{
 		move{
-			0, 2, X,
+			0, 2, player,
 		},
 		move{
-			1, 0, X,
+			1, 0, player,
 		},
 		move{
-			1, 1, X,
+			1, 1, player,
 		},
 		move{
-			1, 2, X,
+			1, 2, player,
 		},
 		move{
-			2, 0, X,
+			2, 0, player,
 		},
 		move{
-			2, 1, X,
+			2, 1, player,
 		},
 		move{
-			2, 2, X,
+			2, 2, player,
 		},
 	}
 
 	if len(actionsGot) != len(actionsWant) {
-		t.Errorf("XWinGame: did not receive expected number of moves: got %d, want %d",
+		return fmt.Errorf("did not receive expected number of moves: got %d, want %d",
 			len(actionsGot),
 			len(actionsWant),
 		)
 	}
 
 	if !containSameMoves(actionsGot, actionsWant) {
-		t.Error("Actions collected are not the same actions we wanted")
+		return fmt.Errorf("Actions collected are not the same actions we wanted")
 	}
 
-	if err := testTerminalAction(g, actionsWant[0], X); err != nil {
-		t.Errorf("XWinGame: %s", err)
+	if err := testTerminalAction(g, actionsWant[0], player); err != nil {
+		return fmt.Errorf("%s", err)
 	}
 
 	for i := 1; i < len(actionsWant); i++ {
 		if err := testNonTerminalAction(g, actionsWant[i]); err != nil {
-			t.Errorf("XWinGame: %s", err)
+			return fmt.Errorf("%s", err)
 		}
+	}
+
+	return nil
+}
+
+func TestHorizontal(t *testing.T) {
+	if err := testHorizontal(X); err != nil {
+		t.Errorf("TestHorizontal: X game failed: %s", err)
+	}
+
+	if err := testHorizontal(O); err != nil {
+		t.Errorf("TestHorizontal: O game failed: %s", err)
+	}
+}
+
+func testVertical(player byte) error {
+	g := NewGame()
+	g.b[0][0] = player
+	g.b[1][0] = player
+
+	if player == O {
+		g.oTurn = true
+	}
+
+	actionsGot := g.GetActions()
+
+	actionsWant := []move{
+		move{
+			2, 0, player,
+		},
+		move{
+			0, 1, player,
+		},
+		move{
+			1, 1, player,
+		},
+		move{
+			2, 1, player,
+		},
+		move{
+			0, 2, player,
+		},
+		move{
+			1, 2, player,
+		},
+		move{
+			2, 2, player,
+		},
+	}
+
+	if len(actionsGot) != len(actionsWant) {
+		return fmt.Errorf("did not receive expected number of moves: got %d, want %d",
+			len(actionsGot),
+			len(actionsWant),
+		)
+	}
+
+	if !containSameMoves(actionsGot, actionsWant) {
+		return fmt.Errorf("Actions collected are not the same actions we wanted")
+	}
+
+	if err := testTerminalAction(g, actionsWant[0], player); err != nil {
+		return fmt.Errorf("%s", err)
+	}
+
+	for i := 1; i < len(actionsWant); i++ {
+		if err := testNonTerminalAction(g, actionsWant[i]); err != nil {
+			return fmt.Errorf("%s", err)
+		}
+	}
+
+	return nil
+}
+
+func TestVertical(t *testing.T) {
+	if err := testVertical(X); err != nil {
+		t.Errorf("TestVertical: X game failed: %s", err)
+	}
+
+	if err := testVertical(O); err != nil {
+		t.Errorf("TestVertical: O game failed: %s", err)
+	}
+}
+
+func testDownRight(player byte) error {
+	g := NewGame()
+	g.b[0][0] = player
+	g.b[1][1] = player
+
+	if player == O {
+		g.oTurn = true
+	}
+
+	actionsGot := g.GetActions()
+
+	actionsWant := []move{
+		move{
+			2, 2, player,
+		},
+		move{
+			0, 1, player,
+		},
+		move{
+			0, 2, player,
+		},
+		move{
+			1, 0, player,
+		},
+		move{
+			1, 2, player,
+		},
+		move{
+			2, 0, player,
+		},
+		move{
+			2, 1, player,
+		},
+	}
+
+	if len(actionsGot) != len(actionsWant) {
+		return fmt.Errorf("did not receive expected number of moves: got %d, want %d",
+			len(actionsGot),
+			len(actionsWant),
+		)
+	}
+
+	if !containSameMoves(actionsGot, actionsWant) {
+		return fmt.Errorf("Actions collected are not the same actions we wanted")
+	}
+
+	if err := testTerminalAction(g, actionsWant[0], player); err != nil {
+		return fmt.Errorf("%s", err)
+	}
+
+	for i := 1; i < len(actionsWant); i++ {
+		if err := testNonTerminalAction(g, actionsWant[i]); err != nil {
+			return fmt.Errorf("%s", err)
+		}
+	}
+
+	return nil
+}
+
+func TestDownRight(t *testing.T) {
+	if err := testDownRight(X); err != nil {
+		t.Errorf("TestDownRight: X game failed: %s", err)
+	}
+
+	if err := testDownRight(O); err != nil {
+		t.Errorf("TestDownRight: O game failed: %s", err)
+	}
+}
+
+func testUpRight(player byte) error {
+	g := NewGame()
+	g.b[2][0] = player
+	g.b[1][1] = player
+
+	if player == O {
+		g.oTurn = true
+	}
+
+	actionsGot := g.GetActions()
+
+	actionsWant := []move{
+		move{
+			0, 2, player,
+		},
+		move{
+			0, 0, player,
+		},
+		move{
+			0, 1, player,
+		},
+		move{
+			1, 0, player,
+		},
+		move{
+			1, 2, player,
+		},
+		move{
+			2, 1, player,
+		},
+		move{
+			2, 2, player,
+		},
+	}
+
+	if len(actionsGot) != len(actionsWant) {
+		return fmt.Errorf("did not receive expected number of moves: got %d, want %d",
+			len(actionsGot),
+			len(actionsWant),
+		)
+	}
+
+	if !containSameMoves(actionsGot, actionsWant) {
+		return fmt.Errorf("Actions collected are not the same actions we wanted")
+	}
+
+	if err := testTerminalAction(g, actionsWant[0], player); err != nil {
+		return fmt.Errorf("%s", err)
+	}
+
+	for i := 1; i < len(actionsWant); i++ {
+		if err := testNonTerminalAction(g, actionsWant[i]); err != nil {
+			return fmt.Errorf("%s", err)
+		}
+	}
+
+	return nil
+}
+
+func TestUpRight(t *testing.T) {
+	if err := testUpRight(X); err != nil {
+		t.Errorf("TestUpRight: X game failed: %s", err)
+	}
+
+	if err := testUpRight(O); err != nil {
+		t.Errorf("TestUpRight: O game failed: %s", err)
 	}
 }
