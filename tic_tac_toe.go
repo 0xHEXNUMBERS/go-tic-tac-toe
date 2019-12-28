@@ -44,15 +44,15 @@ func (b board) IsWinner(player byte) bool {
 		}
 	}
 
-	//Down-Left
-	dlWin := true
+	//Down-Right
+	drWin := true
 	for i := 0; i < SIZE; i++ {
 		if b[i][i] != player {
-			dlWin = false
+			drWin = false
 			break
 		}
 	}
-	if dlWin {
+	if drWin {
 		return true
 	}
 
