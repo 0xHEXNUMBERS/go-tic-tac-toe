@@ -16,6 +16,9 @@ const (
 var (
 	//ErrGameNotOver error
 	ErrGameNotOver = errors.New("Game is not finished")
+
+	//ErrInvalidMove error
+	ErrInvalidMove = errors.New("Move is invalid")
 )
 
 //Move represents an action made by a given player
@@ -72,6 +75,11 @@ func (g Game) GetActions() (moves []Move) {
 //
 //Returns the new game state and an error if any occurred
 func (g Game) ApplyAction(m Move) (Game, error) {
+	//Is the spot vacant?
+	if g.b[m.y][m.x] != '_' {
+		return Game{}, ErrInvalidMove
+	}
+
 	var playerToMove byte = X
 	if g.oTurn {
 		playerToMove = O
