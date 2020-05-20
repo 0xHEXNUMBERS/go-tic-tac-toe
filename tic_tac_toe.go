@@ -93,18 +93,18 @@ func (g Game) String() string {
 }
 
 func (g Game) IsTerminalState() bool {
-	_, err := g.WinningPlayers()
+	_, err := g.Winner()
 	return err == nil
 }
 
-func (g Game) WinningPlayers() ([]byte, error) {
+func (g Game) Winner() (byte, error) {
 	if g.b.IsWinner(X) {
-		return []byte{X}, nil
+		return X, nil
 	} else if g.b.IsWinner(O) {
-		return []byte{O}, nil
+		return O, nil
 	}
 
-	return nil, ERR_GAME_NOT_OVER
+	return '_', ERR_GAME_NOT_OVER
 }
 
 func (g Game) GetActions() (moves []move) {
