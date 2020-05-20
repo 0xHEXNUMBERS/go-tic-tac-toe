@@ -1,4 +1,4 @@
-package tic_tac_toe
+package tictactoe
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func testNonTerminalAction(g Game, m move) error {
+func testNonTerminalAction(g Game, m Move) error {
 	gameCont, err := g.ApplyAction(m)
 	if err != nil {
 		return fmt.Errorf("Could not apply non-terminal action: %s", err)
@@ -23,7 +23,7 @@ func testNonTerminalAction(g Game, m move) error {
 	return nil
 }
 
-func testTerminalAction(g Game, m move, winner byte) error {
+func testTerminalAction(g Game, m Move, winner byte) error {
 	gameFinish, err := g.ApplyAction(m)
 	if err != nil {
 		return fmt.Errorf("Could not apply winning action: %s", err)
@@ -50,15 +50,15 @@ func testTerminalAction(g Game, m move, winner byte) error {
 	return nil
 }
 
-func mappifyMoves(actions []move) map[move]bool {
-	actionsCollected := make(map[move]bool)
+func mappifyMoves(actions []Move) map[Move]bool {
+	actionsCollected := make(map[Move]bool)
 	for _, a := range actions {
 		actionsCollected[a] = true
 	}
 	return actionsCollected
 }
 
-func containSameMoves(a, b []move) bool {
+func containSameMoves(a, b []Move) bool {
 	return reflect.DeepEqual(
 		mappifyMoves(a), mappifyMoves(b),
 	)
@@ -75,26 +75,26 @@ func testHorizontal(player byte) error {
 
 	actionsGot := g.GetActions()
 
-	actionsWant := []move{
-		move{
+	actionsWant := []Move{
+		Move{
 			0, 2,
 		},
-		move{
+		Move{
 			1, 0,
 		},
-		move{
+		Move{
 			1, 1,
 		},
-		move{
+		Move{
 			1, 2,
 		},
-		move{
+		Move{
 			2, 0,
 		},
-		move{
+		Move{
 			2, 1,
 		},
-		move{
+		Move{
 			2, 2,
 		},
 	}
@@ -144,26 +144,26 @@ func testVertical(player byte) error {
 
 	actionsGot := g.GetActions()
 
-	actionsWant := []move{
-		move{
+	actionsWant := []Move{
+		Move{
 			2, 0,
 		},
-		move{
+		Move{
 			0, 1,
 		},
-		move{
+		Move{
 			1, 1,
 		},
-		move{
+		Move{
 			2, 1,
 		},
-		move{
+		Move{
 			0, 2,
 		},
-		move{
+		Move{
 			1, 2,
 		},
-		move{
+		Move{
 			2, 2,
 		},
 	}
@@ -213,26 +213,26 @@ func testDownRight(player byte) error {
 
 	actionsGot := g.GetActions()
 
-	actionsWant := []move{
-		move{
+	actionsWant := []Move{
+		Move{
 			2, 2,
 		},
-		move{
+		Move{
 			0, 1,
 		},
-		move{
+		Move{
 			0, 2,
 		},
-		move{
+		Move{
 			1, 0,
 		},
-		move{
+		Move{
 			1, 2,
 		},
-		move{
+		Move{
 			2, 0,
 		},
-		move{
+		Move{
 			2, 1,
 		},
 	}
@@ -282,26 +282,26 @@ func testUpRight(player byte) error {
 
 	actionsGot := g.GetActions()
 
-	actionsWant := []move{
-		move{
+	actionsWant := []Move{
+		Move{
 			0, 2,
 		},
-		move{
+		Move{
 			0, 0,
 		},
-		move{
+		Move{
 			0, 1,
 		},
-		move{
+		Move{
 			1, 0,
 		},
-		move{
+		Move{
 			1, 2,
 		},
-		move{
+		Move{
 			2, 1,
 		},
-		move{
+		Move{
 			2, 2,
 		},
 	}
