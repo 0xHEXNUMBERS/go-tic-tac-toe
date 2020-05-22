@@ -21,12 +21,12 @@ var (
 	ErrInvalidMove = errors.New("Move is invalid")
 )
 
-//Move represents an action made by a given player
+//Move represents an action made by a given player.
 type Move struct {
 	y, x int
 }
 
-//Game represents the current game state
+//Game represents the current game state.
 type Game struct {
 	b     board
 	oTurn bool
@@ -36,7 +36,7 @@ func (g Game) String() string {
 	return g.b.String()
 }
 
-//IsTerminalState returns whether the game is finished or not
+//IsTerminalState returns whether the game is finished or not.
 func (g Game) IsTerminalState() bool {
 	_, err := g.Winner()
 	return err == nil
@@ -44,7 +44,7 @@ func (g Game) IsTerminalState() bool {
 
 //Winner returns the winner's ascii value.
 //
-//Returns ErrGameNotOver if the game is not over
+//Returns ErrGameNotOver if the game is not over.
 func (g Game) Winner() (byte, error) {
 	if g.b.IsWinner(X) {
 		return X, nil
@@ -56,7 +56,7 @@ func (g Game) Winner() (byte, error) {
 }
 
 //GetActions returns a list of moves that can be made
-//by the current player
+//by the current player.
 func (g Game) GetActions() (moves []Move) {
 	for i := 0; i < SIZE; i++ {
 		for j := 0; j < SIZE; j++ {
@@ -73,7 +73,7 @@ func (g Game) GetActions() (moves []Move) {
 
 //ApplyAction takes a Move and applies the action to the current game state.
 //
-//Returns the new game state and an error if any occurred
+//Returns the new game state and an error if any occurred.
 func (g Game) ApplyAction(m Move) (Game, error) {
 	//Is the spot vacant?
 	if g.b[m.y][m.x] != '_' {
@@ -89,7 +89,19 @@ func (g Game) ApplyAction(m Move) (Game, error) {
 	return g, nil
 }
 
-//NewGame returns a valid new game of tic-tac-toe
+//Player returns the ascii value of the player
+//that is currently deciding a move.
+//
+//Player returns 'o' if player o is making a move.
+//Otherwise, Player return 'x'.
+func (g Game) Player() byte {
+	if g.oTurn {
+		return O
+	}
+	return X
+}
+
+//NewGame returns a valid new game of tic-tac-toe.
 func NewGame() Game {
 	var g Game
 	for i := 0; i < SIZE; i++ {
