@@ -44,15 +44,30 @@ func (g Game) IsTerminalState() bool {
 
 //Winner returns the winner's ascii value.
 //
+//If the game resulted in a draw, it returns '_'.
+//
 //Returns ErrGameNotOver if the game is not over.
 func (g Game) Winner() (byte, error) {
 	if g.b.IsWinner(X) {
 		return X, nil
 	} else if g.b.IsWinner(O) {
 		return O, nil
+	} else if g.draw() {
+		return '_', nil
 	}
 
-	return '_', ErrGameNotOver
+	return ' ', ErrGameNotOver
+}
+
+func (g Game) draw() bool {
+	for i := 0; i < SIZE; i++ {
+		for j := 0; j < SIZE; j++ {
+			if g.b[i][j] == '_' {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 //GetActions returns a list of moves that can be made
