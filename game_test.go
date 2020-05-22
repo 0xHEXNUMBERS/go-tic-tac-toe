@@ -76,27 +76,13 @@ func testHorizontal(player byte) error {
 	actionsGot := g.GetActions()
 
 	actionsWant := []Move{
-		Move{
-			0, 2,
-		},
-		Move{
-			1, 0,
-		},
-		Move{
-			1, 1,
-		},
-		Move{
-			1, 2,
-		},
-		Move{
-			2, 0,
-		},
-		Move{
-			2, 1,
-		},
-		Move{
-			2, 2,
-		},
+		{0, 2},
+		{1, 0},
+		{1, 1},
+		{1, 2},
+		{2, 0},
+		{2, 1},
+		{2, 2},
 	}
 
 	if len(actionsGot) != len(actionsWant) {
@@ -145,27 +131,13 @@ func testVertical(player byte) error {
 	actionsGot := g.GetActions()
 
 	actionsWant := []Move{
-		Move{
-			2, 0,
-		},
-		Move{
-			0, 1,
-		},
-		Move{
-			1, 1,
-		},
-		Move{
-			2, 1,
-		},
-		Move{
-			0, 2,
-		},
-		Move{
-			1, 2,
-		},
-		Move{
-			2, 2,
-		},
+		{2, 0},
+		{0, 1},
+		{1, 1},
+		{2, 1},
+		{0, 2},
+		{1, 2},
+		{2, 2},
 	}
 
 	if len(actionsGot) != len(actionsWant) {
@@ -214,27 +186,13 @@ func testDownRight(player byte) error {
 	actionsGot := g.GetActions()
 
 	actionsWant := []Move{
-		Move{
-			2, 2,
-		},
-		Move{
-			0, 1,
-		},
-		Move{
-			0, 2,
-		},
-		Move{
-			1, 0,
-		},
-		Move{
-			1, 2,
-		},
-		Move{
-			2, 0,
-		},
-		Move{
-			2, 1,
-		},
+		{2, 2},
+		{0, 1},
+		{0, 2},
+		{1, 0},
+		{1, 2},
+		{2, 0},
+		{2, 1},
 	}
 
 	if len(actionsGot) != len(actionsWant) {
@@ -283,27 +241,13 @@ func testUpRight(player byte) error {
 	actionsGot := g.GetActions()
 
 	actionsWant := []Move{
-		Move{
-			0, 2,
-		},
-		Move{
-			0, 0,
-		},
-		Move{
-			0, 1,
-		},
-		Move{
-			1, 0,
-		},
-		Move{
-			1, 2,
-		},
-		Move{
-			2, 1,
-		},
-		Move{
-			2, 2,
-		},
+		{0, 2},
+		{0, 0},
+		{0, 1},
+		{1, 0},
+		{1, 2},
+		{2, 1},
+		{2, 2},
 	}
 
 	if len(actionsGot) != len(actionsWant) {
