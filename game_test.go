@@ -12,7 +12,7 @@ func testNonTerminalAction(g Game, m Move) error {
 		return fmt.Errorf("Could not apply non-terminal action: %s", err)
 	}
 
-	if gameCont.IsTerminalState() {
+	if gameCont.IsTerminal() {
 		return fmt.Errorf("Non-terminal action resulted in a terminal state")
 	}
 
@@ -31,7 +31,7 @@ func testTerminalAction(g Game, m Move, winner byte) error {
 
 	fmt.Println(gameFinish)
 
-	if !gameFinish.IsTerminalState() {
+	if !gameFinish.IsTerminal() {
 		return fmt.Errorf("Winning action did not result in a terminal state")
 	}
 

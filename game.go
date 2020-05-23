@@ -36,8 +36,8 @@ func (g Game) String() string {
 	return g.b.String()
 }
 
-//IsTerminalState returns whether the game is finished or not.
-func (g Game) IsTerminalState() bool {
+//IsTerminal returns whether the game is finished or not.
+func (g Game) IsTerminal() bool {
 	_, err := g.Winner()
 	return err == nil
 }
